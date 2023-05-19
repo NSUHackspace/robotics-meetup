@@ -174,9 +174,12 @@ docker run -it \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
     --volume="src/ROS2:/robotics:rw" \
     osrf/ros:humble-desktop-full
-
-xhost +local:ros2
 ```
+и команда 
+```bash 
+xhost +local:ros2 
+```
+чтобы выдать разрешение контейнеру на доступ к X-серверу хост-системы. 
 
 Когда есть видеокартна от Nvidia, полезно воспользоваться NVIDIA Container Toolkit.
 https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#installation-guide
@@ -191,3 +194,13 @@ docker run -it \
     --gpus all \    
 	osrf/ros:humble-desktop-full
 ```
+
+### Сборка собственного образа
+
+При желании можно собрать собственный образ с помощью docker-файла. Туда можно однократно добавить набор полезных инструментов и не тратить время на их повторную установку. В качестве примера приведу свой [docker-файл](./Dockerfile)
+
+Собрать его можно следующей командой
+```bash
+    docker build -t ros2_humble .
+```
+где ключ -t определяет название образа.

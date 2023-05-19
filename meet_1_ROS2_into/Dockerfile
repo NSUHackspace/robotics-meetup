@@ -2,11 +2,9 @@
 FROM osrf/ros:humble-desktop-full
 
 # Update apps on the base image
-RUN apt-get -y update && apt-get install -y
-
-# Install some tools
-RUN apt-get -y install tmux vim 
-
-# Install some tools
-RUN apt-get -y install ros-humble-gazebo-ros-pkgs
+RUN apt-get update && apt-get install -y \
+    tmux \
+    vim \
+    ros-humble-gazebo-ros-pkgs \
+    && rm -rf /var/lib/apt/lists/*
 
