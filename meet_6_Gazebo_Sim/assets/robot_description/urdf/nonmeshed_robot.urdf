@@ -1,0 +1,209 @@
+<?xml version="1.0"?>
+
+<robot name="robot">
+
+    <!-- Link - chassis -->
+    <link name="link_chassis">
+        <inertial>
+            <mass value="10" />
+            <origin xyz="0 0 0.3" rpy="0 0 0" />
+            <inertia ixx="1.5417" ixy="0" ixz="0" iyy="3.467" iyz="0" izz="4.742" />
+        </inertial>
+
+        <collision>
+            <geometry>
+                <box size="2 1.3 0.4" />
+            </geometry>
+        </collision>
+
+        <visual>
+            <geometry>
+                <box size="2 1.3 0.4" />
+            </geometry>
+            <material name="DarkBlue">
+                <color rgba="0.2 0.2 0.4 1" />
+            </material>
+        </visual>
+    </link>
+
+    <!-- Joint - caster wheel -->
+    <joint name="joint_chassis_caster_wheel" type="fixed">
+        <origin rpy="0 0 0" xyz="0.8 0 -0.15" />
+        <child link="link_caster_wheel" />
+        <parent link="link_chassis" />
+        <joint_properties damping="1.0" friction="1.0" />
+    </joint>
+
+    <!-- Link - caster wheel -->
+    <link name="link_caster_wheel">
+        <inertial>
+            <mass value="1" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="0.002526666666667" ixy="0" ixz="0" iyy="0.002526666666667" iyz="0" izz="0.005"/>
+        </inertial>
+
+        <!-- Caster wheel support -->
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 -0.03" />
+            <geometry>
+                <sphere radius="0.2" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 -0.03" />
+            <geometry>
+                <sphere radius="0.2" />
+            </geometry>
+            <material name="DarkBlue">
+                <color rgba="0.2 0.2 0.4 1" />
+            </material>
+        </visual>
+
+        <!-- Caster wheel -->
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 -0.15" />
+            <geometry>
+                <sphere radius="0.10" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 -0.15" />
+            <geometry>
+                <sphere radius="0.10" />
+            </geometry>
+            <material name="Grey">
+                <color rgba="0.6 0.6 0.6 1" />
+            </material>
+        </visual>
+    </link>
+
+    <!-- Joint - chassis / left wheel -->
+    <joint name="joint_chassis_left_wheel" type="continuous">
+        <origin rpy="0 0 0" xyz="-0.5 0.65 0" />
+        <child link="link_left_wheel" />
+        <parent link="link_chassis" />
+        <axis rpy="0 0 0" xyz="0 1 0" />
+        <limit effort="10000" velocity="1000" />
+        <joint_properties damping="1.0" friction="1.0" />
+    </joint>
+
+    <!-- Link - left wheel -->
+    <link name="link_left_wheel">
+        <inertial>
+            <mass value="1" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="0.002526666666667" ixy="0" ixz="0" iyy="0.002526666666667" iyz="0" izz="0.005"/>
+        </inertial>
+
+        <!-- Tires -->
+        <collision>
+            <origin rpy="1.5707 0 0" xyz="0 0.18 0" />
+            <geometry>
+                <cylinder length="0.12" radius="0.4"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin rpy="1.5707 0 0" xyz="0 0.18 0" />
+            <geometry>
+                <cylinder length="0.12" radius="0.4"/>
+            </geometry>
+            <material name="Black">
+                <color rgba="0.1 0.1 0.1 1" />
+            </material>
+        </visual>
+
+        <!-- Axle -->
+        <collision>
+            <origin rpy="1.5707 0 0" xyz="0 0.06 0" />
+            <geometry>
+                <cylinder length="0.12" radius="0.08"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin rpy="1.5707 0 0" xyz="0 0.06 0" />
+            <geometry>
+                <cylinder length="0.12" radius="0.08"/>
+            </geometry>
+            <material name="Grey">
+                <color rgba="0.6 0.6 0.6 1" />
+            </material>
+        </visual>
+
+        <!-- Hubcap -->
+        <visual>
+            <origin rpy="1.5707 0 0" xyz="0 0.25 0" />
+            <geometry>
+                <box size="0.02 0.5 0.02" />
+            </geometry>
+            <material name="Grey">
+                <color rgba="0.6 0.6 0.6 1" />
+            </material>
+        </visual>
+    </link>
+
+    <!-- Joint - chassis / right wheel -->
+    <joint name="joint_chassis_right_wheel" type="continuous">
+        <origin rpy="0 0 0" xyz="-0.5 -0.65 0" />
+        <child link="link_right_wheel" />
+        <parent link="link_chassis" />
+        <axis rpy="0 0 0" xyz="0 1 0" />
+        <limit effort="10000" velocity="1000" />
+        <joint_properties damping="1.0" friction="1.0" />
+    </joint>
+
+    <!-- Link - right wheel -->
+    <link name="link_right_wheel">
+        <inertial>
+            <mass value="1" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="0.002526666666667" ixy="0" ixz="0" iyy="0.002526666666667" iyz="0" izz="0.005"/>
+        </inertial>
+
+        <!-- Tires -->
+        <collision>
+            <origin rpy="1.5707 0 0" xyz="0 -0.18 0" />
+            <geometry>
+                <cylinder length="0.12" radius="0.4"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin rpy="1.5707 0 0" xyz="0 -0.18 0" />
+            <geometry>
+                <cylinder length="0.12" radius="0.4"/>
+            </geometry>
+            <material name="Black">
+                <color rgba="0.1 0.1 0.1 1" />
+            </material>
+        </visual>
+
+        <!-- Axle -->
+        <collision>
+            <origin rpy="1.5707 0 0" xyz="0 -0.06 0" />
+            <geometry>
+                <cylinder length="0.12" radius="0.08"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin rpy="1.5707 0 0" xyz="0 -0.06 0" />
+            <geometry>
+                <cylinder length="0.12" radius="0.08"/>
+            </geometry>
+            <material name="Grey">
+                <color rgba="0.6 0.6 0.6 1" />
+            </material>
+        </visual>
+
+        <!-- Hubcap -->
+        <visual>
+            <origin rpy="1.5707 0 0" xyz="0 -0.25 0" />
+            <geometry>
+                <box size="0.02 0.5 0.02" />
+            </geometry>
+            <material name="Grey">
+                <color rgba="0.6 0.6 0.6 1" />
+            </material>
+        </visual>
+    </link>
+
+</robot>
+
